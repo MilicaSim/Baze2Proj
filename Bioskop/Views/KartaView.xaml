@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Bioskop.Views.KartaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Bioskop.Views"
+             xmlns:viewModel="clr-namespace:Bioskop.ViewModel"
+             xmlns:vml="clr-namespace:Bioskop.VML"
+             vml:ViewModelLocator.AutoHookedUpViewModel="True"
+             xmlns:data="clr-namespace:Bioskop.Model"
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="1200">
+    <UserControl.DataContext>
+        <viewModel:KartaViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+    <Grid>
+        <DataGrid x:Name="dgridKarta" HorizontalAlignment="Left"  VerticalAlignment="Top"
+                  ItemsSource="{Binding Karte}" AutoGenerateColumns="false" IsReadOnly="True" SelectedItem="{Binding SelektovanaKarta}" HorizontalContentAlignment="Center" Height="490" Width="714" 
+                  ScrollViewer.CanContentScroll="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding IdKarte}" Header="Id karte" Width="*" />
+                <DataGridTextColumn Binding="{Binding Cijena}" Header="Cijena" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Posjetilac.Ime}" Header="Kupac" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Prikazuje.Sadrzi.Sala.Naziv}" Header="Sala" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Prikazuje.Sadrzi.Sjediste.RedniBroj}" Header="Sjediste" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Prikazuje.Film}" Header="Film" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Prikazuje.Termin}" Header="Termin" Width="*"/> 
+            </DataGrid.Columns>
+        </DataGrid>
+        <RadioButton GroupName="Grupa" Content="Dodaj" IsChecked="False" Command="{Binding NavCommand}" CommandParameter="dodaj" Margin="731,10,204,469"/>
+        <RadioButton GroupName="Grupa" Content="Modifikuj" IsChecked="False" Command="{Binding NavCommand}" CommandParameter="modifikuj" Margin="910,10,10,469"/>
+        <RadioButton GroupName="Grupa" Content="Obrisi" IsChecked="False" Command="{Binding NavCommand}" CommandParameter="obrisi" Margin="829,10,109,469"/>
+
+
+
+        <StackPanel Visibility="{Binding Path=IsVisibleStek, Converter={StaticResource BoolToVis}}"  Margin="731,36,10,86">
+            <Label Content="Cijena:" />
+            <TextBox Text="{Binding KartaMD.Cijena, Mode=TwoWay}" />
+            <Label Content="Kupac:"  Visibility="{Binding Path=IsVisibleDodaj, Converter={StaticResource BoolToVis}}"/>
+            <ComboBox SelectedValue="{Binding KartaMD.PosjetilacIdPosjetioca, Mode=TwoWay}" ItemsSource="{Binding Posjetioci}"/>
+            <Label Content="Projekcija:"/>
+            <ComboBox SelectedValue="{Binding KartaMD.PrikazujeIdPrikazivanja, Mode=TwoWay}" ItemsSource="{Binding Prikazivanja}"/>
+           
+        </StackPanel>
+        <StackPanel  Margin="729,419,0,-11">
+            <Button Content="Dodaj" Visibility="{Binding Path=IsVisibleDodaj, Converter={StaticResource BoolToVis}}" Command="{Binding DodajCommand}" Width="100" />
+            <Button Content="Modifikuj" Visibility="{Binding Path=IsVisibleModifikuj, Converter={StaticResource BoolToVis}}"  Command="{Binding ModifikujCommand}"  VerticalAlignment="Top" Width="100" />
+            <Button Content="Obrisi" Visibility="{Binding Path=IsVisibleObrisi, Converter={StaticResource BoolToVis}}"  Command="{Binding ObrisiCommand}" VerticalAlignment="Top" Width="100"/>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

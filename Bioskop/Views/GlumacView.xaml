@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="Bioskop.Views.GlumacView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Bioskop.Views"
+             xmlns:converters="clr-namespace:Bioskop.Converters"
+              xmlns:viewModel="clr-namespace:Bioskop.ViewModel"
+             xmlns:vml="clr-namespace:Bioskop.VML"
+             xmlns:i = "http://schemas.microsoft.com/expression/2010/interactivity"
+             vml:ViewModelLocator.AutoHookedUpViewModel="True"
+             xmlns:data="clr-namespace:Bioskop.Model"
+             xmlns:root ="clr-namespace:Bioskop"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="1200">
+    <UserControl.DataContext>
+        <viewModel:GlumacViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <converters:SaleBoolConverter x:Key="SaleBoolConverter"/>
+        <converters:NameConverter x:Key="NameConverter"/>
+
+        <DataTemplate x:Key="CheckBoxName">
+            <CheckBox>
+                <CheckBox.Content>
+                    <MultiBinding Converter="{StaticResource NameConverter}">
+                        <Binding ></Binding>
+                        <Binding Path="DataContext.NmsModelMap" RelativeSource="{RelativeSource AncestorType={x:Type root:MainWindow}}"></Binding>
+                    </MultiBinding>
+                </CheckBox.Content>
+
+                <CheckBox.IsChecked>
+                    <MultiBinding Converter="{StaticResource SaleBoolConverter}" Mode="OneWay">
+                        <Binding Path="DataContext.FilmoviBool" RelativeSource="{RelativeSource AncestorType=UserControl}"></Binding>
+                        <Binding Mode="TwoWay"></Binding>
+                    </MultiBinding>
+                </CheckBox.IsChecked>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Checked">
+                        <i:InvokeCommandAction Command="{Binding DataContext.VisibilityCheckedCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+											   CommandParameter="{Binding }"/>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="Unchecked">
+                        <i:InvokeCommandAction Command="{Binding DataContext.VisibilityUncheckedCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+											   CommandParameter="{Binding }"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </CheckBox>
+
+        </DataTemplate>
+
+    </UserControl.Resources>
+    <Grid>
+        <DataGrid x:Name="dgridBlagajnik" HorizontalAlignment="Left"  VerticalAlignment="Top"
+                  ItemsSource="{Binding Glumci}" AutoGenerateColumns="false" IsReadOnly="True" SelectedItem="{Binding SelektovaniGlumac}" HorizontalContentAlignment="Center" Height="490" Width="714"
+                  ScrollViewer.CanContentScroll="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding IdGlumca}" Header="Sifra Glumca" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Ime}" Header="Ime" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Prezime}" Header="Prezime" Width="*"/>
+                <DataGridTextColumn Binding="{Binding BrojUloga}" Header="Broj uloga" Width="*"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <RadioButton GroupName="Grupa" Content="Dodaj" IsChecked="False" Command="{Binding NavCommand}" CommandParameter="dodaj" Margin="731,10,204,469"/>
+        <RadioButton GroupName="Grupa" Content="Modifikuj" IsChecked="False" Command="{Binding NavCommand}" CommandParameter="modifikuj" Margin="910,10,10,469"/>
+        <RadioButton GroupName="Grupa" Content="Obrisi" IsChecked="False" Command="{Binding NavCommand}" CommandParameter="obrisi" Margin="829,10,109,469"/>
+
+
+        <StackPanel Visibility="{Binding Path=IsVisibleStek, Converter={StaticResource BoolToVis}}" Margin="731,36,10,273">
+            <TextBlock Text="Ime:" />
+            <TextBox Text="{Binding GlumacMD.Ime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Prezime:" />
+            <TextBox Text="{Binding GlumacMD.Prezime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Broj uloga:" />
+            <TextBox Text="{Binding GlumacMD.BrojUloga, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Filmovi:"/>
+            <GroupBox>
+                <Grid>
+                    <ScrollViewer>
+                        <ItemsControl ItemsSource="{Binding FilmoviBool}" ItemTemplate="{StaticResource CheckBoxName}"/>
+                    </ScrollViewer>
+                </Grid>
+
+            </GroupBox>
+
+        </StackPanel>
+
+        <StackPanel Margin="719,398,10,10">
+            <Button Content="Dodaj" Visibility="{Binding Path=IsVisibleDodaj, Converter={StaticResource BoolToVis}}" Command="{Binding DodajCommand}" Width="100" />
+            <Button Content="Modifikuj" Visibility="{Binding Path=IsVisibleModifikuj, Converter={StaticResource BoolToVis}}"  Command="{Binding ModifikujCommand}"  VerticalAlignment="Top" Width="100" />
+            <Button Content="Obrisi" Visibility="{Binding Path=IsVisibleObrisi, Converter={StaticResource BoolToVis}}"  Command="{Binding ObrisiCommand}" VerticalAlignment="Top" Width="100"/>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

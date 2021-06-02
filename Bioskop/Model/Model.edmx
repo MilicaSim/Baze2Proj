@@ -1,0 +1,877 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Radniks" EntityType="Model.Store.Radniks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Salas" EntityType="Model.Store.Salas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sjedistes" EntityType="Model.Store.Sjedistes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Films" EntityType="Model.Store.Films" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Glumacs" EntityType="Model.Store.Glumacs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Prikazujes" EntityType="Model.Store.Prikazujes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Repertoars" EntityType="Model.Store.Repertoars" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Posjetilacs" EntityType="Model.Store.Posjetilacs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Kartas" EntityType="Model.Store.Kartas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sadrzis" EntityType="Model.Store.Sadrzis" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Radniks_Cistacica" EntityType="Model.Store.Radniks_Cistacica" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Radniks_Menadzer" EntityType="Model.Store.Radniks_Menadzer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Radniks_Blagajnik" EntityType="Model.Store.Radniks_Blagajnik" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SalaCistacica" EntityType="Model.Store.SalaCistacica" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FilmGlumac" EntityType="Model.Store.FilmGlumac" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_SalaCistacica_Sala" Association="Model.Store.FK_SalaCistacica_Sala">
+      <End Role="Sala" EntitySet="Salas" />
+      <End Role="SalaCistacica" EntitySet="SalaCistacica" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalaCistacica_Cistacica" Association="Model.Store.FK_SalaCistacica_Cistacica">
+      <End Role="Cistacica" EntitySet="Radniks_Cistacica" />
+      <End Role="SalaCistacica" EntitySet="SalaCistacica" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FilmGlumac_Film" Association="Model.Store.FK_FilmGlumac_Film">
+      <End Role="Film" EntitySet="Films" />
+      <End Role="FilmGlumac" EntitySet="FilmGlumac" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FilmGlumac_Glumac" Association="Model.Store.FK_FilmGlumac_Glumac">
+      <End Role="Glumac" EntitySet="Glumacs" />
+      <End Role="FilmGlumac" EntitySet="FilmGlumac" />
+    </AssociationSet>
+    <AssociationSet Name="MenadzerRepertoar" Association="Model.Store.MenadzerRepertoar">
+      <End Role="Menadzer" EntitySet="Radniks_Menadzer" />
+      <End Role="Repertoar" EntitySet="Repertoars" />
+    </AssociationSet>
+    <AssociationSet Name="FilmRepertoar" Association="Model.Store.FilmRepertoar">
+      <End Role="Film" EntitySet="Films" />
+      <End Role="Repertoar" EntitySet="Repertoars" />
+    </AssociationSet>
+    <AssociationSet Name="PosjetilacBlagajnik" Association="Model.Store.PosjetilacBlagajnik">
+      <End Role="Posjetilac" EntitySet="Posjetilacs" />
+      <End Role="Blagajnik" EntitySet="Radniks_Blagajnik" />
+    </AssociationSet>
+    <AssociationSet Name="KartaPosjetilac" Association="Model.Store.KartaPosjetilac">
+      <End Role="Karta" EntitySet="Kartas" />
+      <End Role="Posjetilac" EntitySet="Posjetilacs" />
+    </AssociationSet>
+    <AssociationSet Name="SadrziSjediste" Association="Model.Store.SadrziSjediste">
+      <End Role="Sadrzi" EntitySet="Sadrzis" />
+      <End Role="Sjediste" EntitySet="Sjedistes" />
+    </AssociationSet>
+    <AssociationSet Name="SadrziSala" Association="Model.Store.SadrziSala">
+      <End Role="Sadrzi" EntitySet="Sadrzis" />
+      <End Role="Sala" EntitySet="Salas" />
+    </AssociationSet>
+    <AssociationSet Name="SadrziPrikazuje" Association="Model.Store.SadrziPrikazuje">
+      <End Role="Sadrzi" EntitySet="Sadrzis" />
+      <End Role="Prikazuje" EntitySet="Prikazujes" />
+    </AssociationSet>
+    <AssociationSet Name="PrikazujeFilm" Association="Model.Store.PrikazujeFilm">
+      <End Role="Prikazuje" EntitySet="Prikazujes" />
+      <End Role="Film" EntitySet="Films" />
+    </AssociationSet>
+    <AssociationSet Name="PrikazujeKarta" Association="Model.Store.PrikazujeKarta">
+      <End Role="Prikazuje" EntitySet="Prikazujes" />
+      <End Role="Karta" EntitySet="Kartas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cistacica_inherits_Radnik" Association="Model.Store.FK_Cistacica_inherits_Radnik">
+      <End Role="Radnik" EntitySet="Radniks" />
+      <End Role="Cistacica" EntitySet="Radniks_Cistacica" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menadzer_inherits_Radnik" Association="Model.Store.FK_Menadzer_inherits_Radnik">
+      <End Role="Radnik" EntitySet="Radniks" />
+      <End Role="Menadzer" EntitySet="Radniks_Menadzer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Blagajnik_inherits_Radnik" Association="Model.Store.FK_Blagajnik_inherits_Radnik">
+      <End Role="Radnik" EntitySet="Radniks" />
+      <End Role="Blagajnik" EntitySet="Radniks_Blagajnik" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Radniks">
+    <Key>
+      <PropertyRef Name="IdRadnika" />
+    </Key>
+    <Property Name="IdRadnika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prezime" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Salas">
+    <Key>
+      <PropertyRef Name="IdSale" />
+    </Key>
+    <Property Name="IdSale" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kapacitet" Type="int" Nullable="false" />
+    <Property Name="BrojRedova" Type="int" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sjedistes">
+    <Key>
+      <PropertyRef Name="IdSjedista" />
+    </Key>
+    <Property Name="IdSjedista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RedniBroj" Type="int" Nullable="false" />
+    <Property Name="Red" Type="int" Nullable="false" />
+    <Property Name="Zauzeto" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Films">
+    <Key>
+      <PropertyRef Name="IdFilma" />
+    </Key>
+    <Property Name="IdFilma" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Trajanje" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Zanr" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RepertoarIdRepertoara" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Glumacs">
+    <Key>
+      <PropertyRef Name="IdGlumca" />
+    </Key>
+    <Property Name="IdGlumca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prezime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BrojUloga" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prikazujes">
+    <Key>
+      <PropertyRef Name="IdPrikazivanja" />
+    </Key>
+    <Property Name="Termin" Type="datetime" Nullable="false" />
+    <Property Name="IdPrikazivanja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SadrziSjedisteIdSjedista" Type="int" Nullable="true" />
+    <Property Name="SadrziSalaIdSale" Type="int" Nullable="false" />
+    <Property Name="FilmIdFilma" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Repertoars">
+    <Key>
+      <PropertyRef Name="IdRepertoara" />
+    </Key>
+    <Property Name="IdRepertoara" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Trajanje" Type="int" Nullable="false" />
+    <Property Name="MenadzerIdRadnika" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Posjetilacs">
+    <Key>
+      <PropertyRef Name="IdPosjetioca" />
+    </Key>
+    <Property Name="IdPosjetioca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prezime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BlagajnikIdRadnika" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kartas">
+    <Key>
+      <PropertyRef Name="IdKarte" />
+    </Key>
+    <Property Name="IdKarte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cijena" Type="int" Nullable="false" />
+    <Property Name="PosjetilacIdPosjetioca" Type="int" Nullable="true" />
+    <Property Name="PrikazujeIdPrikazivanja" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Sadrzis">
+    <Key>
+      <PropertyRef Name="SjedisteIdSjedista" />
+      <PropertyRef Name="SalaIdSale" />
+    </Key>
+    <Property Name="SjedisteIdSjedista" Type="int" Nullable="false" />
+    <Property Name="SalaIdSale" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Radniks_Cistacica">
+    <Key>
+      <PropertyRef Name="IdRadnika" />
+    </Key>
+    <Property Name="BrojOcistenihSala" Type="int" Nullable="false" />
+    <Property Name="IdRadnika" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Radniks_Menadzer">
+    <Key>
+      <PropertyRef Name="IdRadnika" />
+    </Key>
+    <Property Name="Staz" Type="int" Nullable="false" />
+    <Property Name="IdRadnika" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Radniks_Blagajnik">
+    <Key>
+      <PropertyRef Name="IdRadnika" />
+    </Key>
+    <Property Name="BrojProdatihKarata" Type="int" Nullable="false" />
+    <Property Name="IdRadnika" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalaCistacica">
+    <Key>
+      <PropertyRef Name="Salas_IdSale" />
+      <PropertyRef Name="Cistacicas_IdRadnika" />
+    </Key>
+    <Property Name="Salas_IdSale" Type="int" Nullable="false" />
+    <Property Name="Cistacicas_IdRadnika" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FilmGlumac">
+    <Key>
+      <PropertyRef Name="Films_IdFilma" />
+      <PropertyRef Name="Glumacs_IdGlumca" />
+    </Key>
+    <Property Name="Films_IdFilma" Type="int" Nullable="false" />
+    <Property Name="Glumacs_IdGlumca" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="MenadzerRepertoar">
+    <End Role="Menadzer" Type="Model.Store.Radniks_Menadzer" Multiplicity="1" />
+    <End Role="Repertoar" Type="Model.Store.Repertoars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menadzer">
+        <PropertyRef Name="IdRadnika" />
+      </Principal>
+      <Dependent Role="Repertoar">
+        <PropertyRef Name="MenadzerIdRadnika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FilmRepertoar">
+    <End Role="Film" Type="Model.Store.Films" Multiplicity="*" />
+    <End Role="Repertoar" Type="Model.Store.Repertoars" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Repertoar">
+        <PropertyRef Name="IdRepertoara" />
+      </Principal>
+      <Dependent Role="Film">
+        <PropertyRef Name="RepertoarIdRepertoara" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PosjetilacBlagajnik">
+    <End Role="Posjetilac" Type="Model.Store.Posjetilacs" Multiplicity="*" />
+    <End Role="Blagajnik" Type="Model.Store.Radniks_Blagajnik" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Blagajnik">
+        <PropertyRef Name="IdRadnika" />
+      </Principal>
+      <Dependent Role="Posjetilac">
+        <PropertyRef Name="BlagajnikIdRadnika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KartaPosjetilac">
+    <End Role="Karta" Type="Model.Store.Kartas" Multiplicity="*" />
+    <End Role="Posjetilac" Type="Model.Store.Posjetilacs" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Posjetilac">
+        <PropertyRef Name="IdPosjetioca" />
+      </Principal>
+      <Dependent Role="Karta">
+        <PropertyRef Name="PosjetilacIdPosjetioca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SadrziSjediste">
+    <End Role="Sadrzi" Type="Model.Store.Sadrzis" Multiplicity="*" />
+    <End Role="Sjediste" Type="Model.Store.Sjedistes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Sjediste">
+        <PropertyRef Name="IdSjedista" />
+      </Principal>
+      <Dependent Role="Sadrzi">
+        <PropertyRef Name="SjedisteIdSjedista" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SadrziSala">
+    <End Role="Sadrzi" Type="Model.Store.Sadrzis" Multiplicity="*" />
+    <End Role="Sala" Type="Model.Store.Salas" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Sala">
+        <PropertyRef Name="IdSale" />
+      </Principal>
+      <Dependent Role="Sadrzi">
+        <PropertyRef Name="SalaIdSale" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SadrziPrikazuje">
+    <End Role="Sadrzi" Type="Model.Store.Sadrzis" Multiplicity="1" />
+    <End Role="Prikazuje" Type="Model.Store.Prikazujes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sadrzi">
+        <PropertyRef Name="SjedisteIdSjedista" />
+        <PropertyRef Name="SalaIdSale" />
+      </Principal>
+      <Dependent Role="Prikazuje">
+        <PropertyRef Name="SadrziSjedisteIdSjedista" />
+        <PropertyRef Name="SadrziSalaIdSale" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PrikazujeFilm">
+    <End Role="Prikazuje" Type="Model.Store.Prikazujes" Multiplicity="*" />
+    <End Role="Film" Type="Model.Store.Films" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Film">
+        <PropertyRef Name="IdFilma" />
+      </Principal>
+      <Dependent Role="Prikazuje">
+        <PropertyRef Name="FilmIdFilma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PrikazujeKarta">
+    <End Role="Prikazuje" Type="Model.Store.Prikazujes" Multiplicity="0..1" />
+    <End Role="Karta" Type="Model.Store.Kartas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prikazuje">
+        <PropertyRef Name="IdPrikazivanja" />
+      </Principal>
+      <Dependent Role="Karta">
+        <PropertyRef Name="PrikazujeIdPrikazivanja" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalaCistacica_Sala">
+    <End Role="Sala" Type="Model.Store.Salas" Multiplicity="1" />
+    <End Role="SalaCistacica" Type="Model.Store.SalaCistacica" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sala">
+        <PropertyRef Name="IdSale" />
+      </Principal>
+      <Dependent Role="SalaCistacica">
+        <PropertyRef Name="Salas_IdSale" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalaCistacica_Cistacica">
+    <End Role="SalaCistacica" Type="Model.Store.SalaCistacica" Multiplicity="*" />
+    <End Role="Cistacica" Type="Model.Store.Radniks_Cistacica" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Cistacica">
+        <PropertyRef Name="IdRadnika" />
+      </Principal>
+      <Dependent Role="SalaCistacica">
+        <PropertyRef Name="Cistacicas_IdRadnika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FilmGlumac_Film">
+    <End Role="Film" Type="Model.Store.Films" Multiplicity="1" />
+    <End Role="FilmGlumac" Type="Model.Store.FilmGlumac" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Film">
+        <PropertyRef Name="IdFilma" />
+      </Principal>
+      <Dependent Role="FilmGlumac">
+        <PropertyRef Name="Films_IdFilma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FilmGlumac_Glumac">
+    <End Role="FilmGlumac" Type="Model.Store.FilmGlumac" Multiplicity="*" />
+    <End Role="Glumac" Type="Model.Store.Glumacs" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Glumac">
+        <PropertyRef Name="IdGlumca" />
+      </Principal>
+      <Dependent Role="FilmGlumac">
+        <PropertyRef Name="Glumacs_IdGlumca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cistacica_inherits_Radnik">
+    <End Role="Radnik" Type="Model.Store.Radniks" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Cistacica" Type="Model.Store.Radniks_Cistacica" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Radnik">
+        <PropertyRef Name="IdRadnika" />
+      </Principal>
+      <Dependent Role="Cistacica">
+        <PropertyRef Name="IdRadnika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menadzer_inherits_Radnik">
+    <End Role="Radnik" Type="Model.Store.Radniks" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Menadzer" Type="Model.Store.Radniks_Menadzer" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Radnik">
+        <PropertyRef Name="IdRadnika" />
+      </Principal>
+      <Dependent Role="Menadzer">
+        <PropertyRef Name="IdRadnika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Blagajnik_inherits_Radnik">
+    <End Role="Radnik" Type="Model.Store.Radniks" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Blagajnik" Type="Model.Store.Radniks_Blagajnik" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Radnik">
+        <PropertyRef Name="IdRadnika" />
+      </Principal>
+      <Dependent Role="Blagajnik">
+        <PropertyRef Name="IdRadnika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Radniks" EntityType="Model.Radnik" />
+          <EntitySet Name="Salas" EntityType="Model.Sala" />
+          <AssociationSet Name="SalaCistacica" Association="Model.SalaCistacica">
+            <End Role="Sala" EntitySet="Salas" />
+            <End Role="Cistacica" EntitySet="Radniks" />
+          </AssociationSet>
+          <EntitySet Name="Sjedistes" EntityType="Model.Sjediste" />
+          <EntitySet Name="Films" EntityType="Model.Film" />
+          <EntitySet Name="Glumacs" EntityType="Model.Glumac" />
+          <AssociationSet Name="FilmGlumac" Association="Model.FilmGlumac">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Glumac" EntitySet="Glumacs" />
+          </AssociationSet>
+          <EntitySet Name="Prikazujes" EntityType="Model.Prikazuje" />
+          <EntitySet Name="Repertoars" EntityType="Model.Repertoar" />
+          <AssociationSet Name="MenadzerRepertoar" Association="Model.MenadzerRepertoar">
+            <End Role="Menadzer" EntitySet="Radniks" />
+            <End Role="Repertoar" EntitySet="Repertoars" />
+          </AssociationSet>
+          <EntitySet Name="Posjetilacs" EntityType="Model.Posjetilac" />
+          <EntitySet Name="Kartas" EntityType="Model.Karta" />
+          <AssociationSet Name="FilmRepertoar" Association="Model.FilmRepertoar">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Repertoar" EntitySet="Repertoars" />
+          </AssociationSet>
+          <AssociationSet Name="PosjetilacBlagajnik" Association="Model.PosjetilacBlagajnik">
+            <End Role="Posjetilac" EntitySet="Posjetilacs" />
+            <End Role="Blagajnik" EntitySet="Radniks" />
+          </AssociationSet>
+          <AssociationSet Name="KartaPosjetilac" Association="Model.KartaPosjetilac">
+            <End Role="Karta" EntitySet="Kartas" />
+            <End Role="Posjetilac" EntitySet="Posjetilacs" />
+          </AssociationSet>
+          <EntitySet Name="Sadrzis" EntityType="Model.Sadrzi" />
+          <AssociationSet Name="SadrziSjediste" Association="Model.SadrziSjediste">
+            <End Role="Sadrzi" EntitySet="Sadrzis" />
+            <End Role="Sjediste" EntitySet="Sjedistes" />
+          </AssociationSet>
+          <AssociationSet Name="SadrziSala" Association="Model.SadrziSala">
+            <End Role="Sadrzi" EntitySet="Sadrzis" />
+            <End Role="Sala" EntitySet="Salas" />
+          </AssociationSet>
+          <AssociationSet Name="SadrziPrikazuje" Association="Model.SadrziPrikazuje">
+            <End Role="Sadrzi" EntitySet="Sadrzis" />
+            <End Role="Prikazuje" EntitySet="Prikazujes" />
+          </AssociationSet>
+          <AssociationSet Name="PrikazujeFilm" Association="Model.PrikazujeFilm">
+            <End Role="Prikazuje" EntitySet="Prikazujes" />
+            <End Role="Film" EntitySet="Films" />
+          </AssociationSet>
+          <AssociationSet Name="PrikazujeKarta" Association="Model.PrikazujeKarta">
+            <End Role="Prikazuje" EntitySet="Prikazujes" />
+            <End Role="Karta" EntitySet="Kartas" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Radnik">
+          <Key>
+            <PropertyRef Name="IdRadnika" />
+          </Key>
+          <Property Name="IdRadnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Prezime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Cistacica" BaseType="Model.Radnik" >
+          <Property Name="BrojOcistenihSala" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Salas" Relationship="Model.SalaCistacica" FromRole="Cistacica" ToRole="Sala" />
+        </EntityType>
+        <EntityType Name="Blagajnik" BaseType="Model.Radnik" >
+          <Property Name="BrojProdatihKarata" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Posjetilacs" Relationship="Model.PosjetilacBlagajnik" FromRole="Blagajnik" ToRole="Posjetilac" />
+        </EntityType>
+        <EntityType Name="Menadzer" BaseType="Model.Radnik" >
+          <Property Name="Staz" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Repertoars" Relationship="Model.MenadzerRepertoar" FromRole="Menadzer" ToRole="Repertoar" />
+        </EntityType>
+        <EntityType Name="Sala">
+          <Key>
+            <PropertyRef Name="IdSale" />
+          </Key>
+          <Property Name="IdSale" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kapacitet" Type="Int32" Nullable="false" />
+          <Property Name="BrojRedova" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Cistacicas" Relationship="Model.SalaCistacica" FromRole="Sala" ToRole="Cistacica" />
+          <NavigationProperty Name="Sadrzis" Relationship="Model.SadrziSala" FromRole="Sala" ToRole="Sadrzi" />
+        </EntityType>
+        <Association Name="SalaCistacica">
+          <End Type="Model.Sala" Role="Sala" Multiplicity="*" />
+          <End Type="Model.Cistacica" Role="Cistacica" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Sjediste">
+          <Key>
+            <PropertyRef Name="IdSjedista" />
+          </Key>
+          <Property Name="IdSjedista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RedniBroj" Type="Int32" Nullable="false" />
+          <Property Name="Red" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sadrzis" Relationship="Model.SadrziSjediste" FromRole="Sjediste" ToRole="Sadrzi" />
+          <Property Name="Zauzeto" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="IdFilma" />
+          </Key>
+          <Property Name="IdFilma" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Trajanje" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Zanr" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Glumacs" Relationship="Model.FilmGlumac" FromRole="Film" ToRole="Glumac" />
+          <NavigationProperty Name="Repertoar" Relationship="Model.FilmRepertoar" FromRole="Film" ToRole="Repertoar" />
+          <Property Name="RepertoarIdRepertoara" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Prikazujes" Relationship="Model.PrikazujeFilm" FromRole="Film" ToRole="Prikazuje" />
+        </EntityType>
+        <EntityType Name="Glumac">
+          <Key>
+            <PropertyRef Name="IdGlumca" />
+          </Key>
+          <Property Name="IdGlumca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Prezime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BrojUloga" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Films" Relationship="Model.FilmGlumac" FromRole="Glumac" ToRole="Film" />
+        </EntityType>
+        <Association Name="FilmGlumac">
+          <End Type="Model.Film" Role="Film" Multiplicity="*" />
+          <End Type="Model.Glumac" Role="Glumac" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Prikazuje" >
+          <Key>
+            <PropertyRef Name="IdPrikazivanja" />
+          </Key>
+          <Property Name="Termin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdPrikazivanja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Sadrzi" Relationship="Model.SadrziPrikazuje" FromRole="Prikazuje" ToRole="Sadrzi" />
+          <Property Name="SadrziSjedisteIdSjedista" Type="Int32" Nullable="true" />
+          <Property Name="SadrziSalaIdSale" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Film" Relationship="Model.PrikazujeFilm" FromRole="Prikazuje" ToRole="Film" />
+          <Property Name="FilmIdFilma" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kartas" Relationship="Model.PrikazujeKarta" FromRole="Prikazuje" ToRole="Karta" />
+        </EntityType>
+        <EntityType Name="Repertoar">
+          <Key>
+            <PropertyRef Name="IdRepertoara" />
+          </Key>
+          <Property Name="IdRepertoara" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Trajanje" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menadzer" Relationship="Model.MenadzerRepertoar" FromRole="Repertoar" ToRole="Menadzer" />
+          <Property Name="MenadzerIdRadnika" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Films" Relationship="Model.FilmRepertoar" FromRole="Repertoar" ToRole="Film" />
+        </EntityType>
+        <Association Name="MenadzerRepertoar">
+          <End Type="Model.Menadzer" Role="Menadzer" Multiplicity="1" />
+          <End Type="Model.Repertoar" Role="Repertoar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menadzer">
+              <PropertyRef Name="IdRadnika" />
+            </Principal>
+            <Dependent Role="Repertoar">
+              <PropertyRef Name="MenadzerIdRadnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Posjetilac">
+          <Key>
+            <PropertyRef Name="IdPosjetioca" />
+          </Key>
+          <Property Name="IdPosjetioca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Prezime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Blagajnik" Relationship="Model.PosjetilacBlagajnik" FromRole="Posjetilac" ToRole="Blagajnik" />
+          <Property Name="BlagajnikIdRadnika" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kartas" Relationship="Model.KartaPosjetilac" FromRole="Posjetilac" ToRole="Karta" />
+        </EntityType>
+        <EntityType Name="Karta">
+          <Key>
+            <PropertyRef Name="IdKarte" />
+          </Key>
+          <Property Name="IdKarte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cijena" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Posjetilac" Relationship="Model.KartaPosjetilac" FromRole="Karta" ToRole="Posjetilac" />
+          <Property Name="PosjetilacIdPosjetioca" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Prikazuje" Relationship="Model.PrikazujeKarta" FromRole="Karta" ToRole="Prikazuje" />
+          <Property Name="PrikazujeIdPrikazivanja" Type="Int32" Nullable="true" />
+        </EntityType>
+        <Association Name="FilmRepertoar">
+          <End Type="Model.Film" Role="Film" Multiplicity="*" />
+          <End Type="Model.Repertoar" Role="Repertoar" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Repertoar">
+              <PropertyRef Name="IdRepertoara" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="RepertoarIdRepertoara" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PosjetilacBlagajnik">
+          <End Type="Model.Posjetilac" Role="Posjetilac" Multiplicity="*" />
+          <End Type="Model.Blagajnik" Role="Blagajnik" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Blagajnik">
+              <PropertyRef Name="IdRadnika" />
+            </Principal>
+            <Dependent Role="Posjetilac">
+              <PropertyRef Name="BlagajnikIdRadnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="KartaPosjetilac">
+          <End Type="Model.Karta" Role="Karta" Multiplicity="*" />
+          <End Type="Model.Posjetilac" Role="Posjetilac" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Posjetilac">
+              <PropertyRef Name="IdPosjetioca" />
+            </Principal>
+            <Dependent Role="Karta">
+              <PropertyRef Name="PosjetilacIdPosjetioca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sadrzi" >
+          <Key>
+            <PropertyRef Name="SjedisteIdSjedista" />
+            <PropertyRef Name="SalaIdSale" />
+          </Key>
+          <NavigationProperty Name="Sjediste" Relationship="Model.SadrziSjediste" FromRole="Sadrzi" ToRole="Sjediste" />
+          <Property Name="SjedisteIdSjedista" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sala" Relationship="Model.SadrziSala" FromRole="Sadrzi" ToRole="Sala" />
+          <Property Name="SalaIdSale" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Prikazujes" Relationship="Model.SadrziPrikazuje" FromRole="Sadrzi" ToRole="Prikazuje" />
+        </EntityType>
+        <Association Name="SadrziSjediste">
+          <End Type="Model.Sadrzi" Role="Sadrzi" Multiplicity="*" />
+          <End Type="Model.Sjediste" Role="Sjediste" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Sjediste">
+              <PropertyRef Name="IdSjedista" />
+            </Principal>
+            <Dependent Role="Sadrzi">
+              <PropertyRef Name="SjedisteIdSjedista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SadrziSala">
+          <End Type="Model.Sadrzi" Role="Sadrzi" Multiplicity="*" />
+          <End Type="Model.Sala" Role="Sala" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Sala">
+              <PropertyRef Name="IdSale" />
+            </Principal>
+            <Dependent Role="Sadrzi">
+              <PropertyRef Name="SalaIdSale" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SadrziPrikazuje">
+          <End Type="Model.Sadrzi" Role="Sadrzi" Multiplicity="1" />
+          <End Type="Model.Prikazuje" Role="Prikazuje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sadrzi">
+              <PropertyRef Name="SjedisteIdSjedista" />
+              <PropertyRef Name="SalaIdSale" />
+            </Principal>
+            <Dependent Role="Prikazuje">
+              <PropertyRef Name="SadrziSjedisteIdSjedista" />
+              <PropertyRef Name="SadrziSalaIdSale" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PrikazujeFilm">
+          <End Type="Model.Prikazuje" Role="Prikazuje" Multiplicity="*" />
+          <End Type="Model.Film" Role="Film" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="IdFilma" />
+            </Principal>
+            <Dependent Role="Prikazuje">
+              <PropertyRef Name="FilmIdFilma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PrikazujeKarta">
+          <End Type="Model.Prikazuje" Role="Prikazuje" Multiplicity="0..1" />
+          <End Type="Model.Karta" Role="Karta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prikazuje">
+              <PropertyRef Name="IdPrikazivanja" />
+            </Principal>
+            <Dependent Role="Karta">
+              <PropertyRef Name="PrikazujeIdPrikazivanja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelContainer">
+    <EntitySetMapping Name="Radniks">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Radnik)">
+        <MappingFragment StoreEntitySet="Radniks">
+          <ScalarProperty Name="IdRadnika" ColumnName="IdRadnika" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Cistacica)">
+        <MappingFragment StoreEntitySet="Radniks_Cistacica">
+          <ScalarProperty Name="IdRadnika" ColumnName="IdRadnika" />
+          <ScalarProperty Name="BrojOcistenihSala" ColumnName="BrojOcistenihSala" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Menadzer)">
+        <MappingFragment StoreEntitySet="Radniks_Menadzer">
+          <ScalarProperty Name="IdRadnika" ColumnName="IdRadnika" />
+          <ScalarProperty Name="Staz" ColumnName="Staz" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Blagajnik)">
+        <MappingFragment StoreEntitySet="Radniks_Blagajnik">
+          <ScalarProperty Name="IdRadnika" ColumnName="IdRadnika" />
+          <ScalarProperty Name="BrojProdatihKarata" ColumnName="BrojProdatihKarata" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Sala)">
+        <MappingFragment StoreEntitySet="Salas">
+          <ScalarProperty Name="IdSale" ColumnName="IdSale" />
+          <ScalarProperty Name="Kapacitet" ColumnName="Kapacitet" />
+          <ScalarProperty Name="BrojRedova" ColumnName="BrojRedova" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sjedistes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Sjediste)">
+        <MappingFragment StoreEntitySet="Sjedistes">
+          <ScalarProperty Name="IdSjedista" ColumnName="IdSjedista" />
+          <ScalarProperty Name="RedniBroj" ColumnName="RedniBroj" />
+          <ScalarProperty Name="Red" ColumnName="Red" />
+          <ScalarProperty Name="Zauzeto" ColumnName="Zauzeto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Films">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Film)">
+        <MappingFragment StoreEntitySet="Films">
+          <ScalarProperty Name="IdFilma" ColumnName="IdFilma" />
+          <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+          <ScalarProperty Name="Zanr" ColumnName="Zanr" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="RepertoarIdRepertoara" ColumnName="RepertoarIdRepertoara" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Glumacs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Glumac)">
+        <MappingFragment StoreEntitySet="Glumacs">
+          <ScalarProperty Name="IdGlumca" ColumnName="IdGlumca" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="BrojUloga" ColumnName="BrojUloga" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prikazujes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Prikazuje)">
+        <MappingFragment StoreEntitySet="Prikazujes">
+          <ScalarProperty Name="IdPrikazivanja" ColumnName="IdPrikazivanja" />
+          <ScalarProperty Name="Termin" ColumnName="Termin" />
+          <ScalarProperty Name="SadrziSjedisteIdSjedista" ColumnName="SadrziSjedisteIdSjedista" />
+          <ScalarProperty Name="SadrziSalaIdSale" ColumnName="SadrziSalaIdSale" />
+          <ScalarProperty Name="FilmIdFilma" ColumnName="FilmIdFilma" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Repertoars">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Repertoar)">
+        <MappingFragment StoreEntitySet="Repertoars">
+          <ScalarProperty Name="IdRepertoara" ColumnName="IdRepertoara" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+          <ScalarProperty Name="MenadzerIdRadnika" ColumnName="MenadzerIdRadnika" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posjetilacs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Posjetilac)">
+        <MappingFragment StoreEntitySet="Posjetilacs">
+          <ScalarProperty Name="IdPosjetioca" ColumnName="IdPosjetioca" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="BlagajnikIdRadnika" ColumnName="BlagajnikIdRadnika" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kartas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Karta)">
+        <MappingFragment StoreEntitySet="Kartas">
+          <ScalarProperty Name="IdKarte" ColumnName="IdKarte" />
+          <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+          <ScalarProperty Name="PosjetilacIdPosjetioca" ColumnName="PosjetilacIdPosjetioca" />
+          <ScalarProperty Name="PrikazujeIdPrikazivanja" ColumnName="PrikazujeIdPrikazivanja" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sadrzis">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Sadrzi)">
+        <MappingFragment StoreEntitySet="Sadrzis">
+          <ScalarProperty Name="SjedisteIdSjedista" ColumnName="SjedisteIdSjedista" />
+          <ScalarProperty Name="SalaIdSale" ColumnName="SalaIdSale" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SalaCistacica" TypeName="Model.SalaCistacica" StoreEntitySet="SalaCistacica">
+      <EndProperty Name="Sala">
+        <ScalarProperty Name="IdSale" ColumnName="Salas_IdSale" />
+      </EndProperty>
+      <EndProperty Name="Cistacica">
+        <ScalarProperty Name="IdRadnika" ColumnName="Cistacicas_IdRadnika" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FilmGlumac" TypeName="Model.FilmGlumac" StoreEntitySet="FilmGlumac">
+      <EndProperty Name="Film">
+        <ScalarProperty Name="IdFilma" ColumnName="Films_IdFilma" />
+      </EndProperty>
+      <EndProperty Name="Glumac">
+        <ScalarProperty Name="IdGlumca" ColumnName="Glumacs_IdGlumca" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,110 @@
+﻿<Controls:MetroWindow x:Class="Bioskop.MainWindow"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bioskop"
+        xmlns:view="clr-namespace:Bioskop.Views"
+        xmlns:viewModel="clr-namespace:Bioskop.ViewModel"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="WidthAndHeight"
+        mc:Ignorable="d"
+        Title="Bioskop" Height="530" Width="1200">
+    
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewModel:BlagajnikViewModel}">
+                <view:BlagajnikView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:CistacicaViewModel}">
+            <view:CistacicaView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:PosjetilacViewModel}">
+             <view:PosjetilacView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MenadzerViewModel}">
+            <view:MenadzerView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:PrikazujeViewModel}">
+            <view:PrikazujeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:SalaViewModel}">
+            <view:SalaView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:GlumacViewModel}">
+                <view:GlumacView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:SjedisteViewModel}">
+            <view:SjedisteView/>
+        </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:FilmViewModel}">
+                <view:FilmView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:RepertoarViewModel}">
+            <view:RepertoarView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:KartaViewModel}">
+            <view:KartaView/>
+        </DataTemplate>
+
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="0,0,0,0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" Margin="5">
+            <Menu Name="Menu1"  DockPanel.Dock="Top" Height="40" FontSize="20">
+                <MenuItem Header="Cistacica"  Command="{Binding NavCommand}" CommandParameter="cistacica">
+
+                </MenuItem>
+                <MenuItem Header="Blagajnik" Command="{Binding NavCommand}" CommandParameter="blagajnik">
+
+                </MenuItem>
+                <MenuItem Header="Menadzer" Command="{Binding NavCommand}" CommandParameter="menadzer">
+
+                </MenuItem>
+                <MenuItem Header="Sala" Command="{Binding NavCommand}"  CommandParameter="sala">
+
+                </MenuItem>
+                <MenuItem Header="Sjediste" Command="{Binding NavCommand}"  CommandParameter="sjediste">
+
+                </MenuItem>
+                <MenuItem Header="Film" Command="{Binding NavCommand}"  CommandParameter="film">
+
+                </MenuItem>
+                <MenuItem Header="Glumac" Command="{Binding NavCommand}"  CommandParameter="glumac">
+
+                </MenuItem>
+                <MenuItem Header="Repertoar" Command="{Binding NavCommand}"  CommandParameter="repertoar">
+
+                </MenuItem>
+                <MenuItem Name="Posjetilac" Header="Posjetilac"  Command="{Binding NavCommand}" CommandParameter="posjetilac">
+
+                </MenuItem>
+                <MenuItem Header="Prikazivanje" Command="{Binding NavCommand}" CommandParameter="prikazuje">
+
+                </MenuItem>
+                <MenuItem Header="Karta" Command="{Binding NavCommand}"  CommandParameter="karta">
+
+                </MenuItem>
+                <!--<Label Width="40" Content="{Binding LoggedUser}" Visibility="{Binding Path=IsVisible, Converter={StaticResource BoolToVis}}"></Label>-->
+            </Menu>
+        </DockPanel>
+        <Grid Grid.Row="1" >
+            <ContentControl Content="{Binding CurrentViewModel}"  />
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>
