@@ -159,7 +159,7 @@ namespace Bioskop.ViewModel
                 {
                     var sjediste = access.Sjedistes.FirstOrDefault(n => n.IdSjedista == SelektovanoSjediste.IdSjedista);
                     //access.Sadrzis.Remove(access.Sadrzis.FirstOrDefault(n => n.SjedisteIdSjedista == SelektovanoSjediste.IdSjedista));
-                    
+                    sjediste.Sadrzis.Clear();
                     access.Sjedistes.Remove(sjediste);
 
                     int success = access.SaveChanges();

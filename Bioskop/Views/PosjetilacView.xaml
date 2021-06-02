@@ -39,8 +39,26 @@
             <TextBlock Text="Prezime:" />
             <TextBox Text="{Binding PosjetilacMD.Prezime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Label Content="Blagajnik:"/>
-            <ComboBox SelectedValue="{Binding PosjetilacMD.BlagajnikIdRadnika , Mode=TwoWay}" ItemsSource="{Binding Blagajnici}"/>
-            
+            <StackPanel Orientation="Vertical">
+
+                <ComboBox ItemsSource="{Binding Path=ListBlagajnika}" SelectedItem="{Binding Path=SelectedBlagajnik}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Ime"/>
+                                        <Binding Path="Prezime"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+
+
         </StackPanel>
 
         <StackPanel Margin="719,398,10,10">

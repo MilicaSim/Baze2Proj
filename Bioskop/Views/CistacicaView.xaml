@@ -68,7 +68,7 @@
         <RadioButton GroupName="Grupa" Content="Obrisi" IsChecked="False" Command="{Binding NavCommand}" CommandParameter="obrisi" Margin="829,10,109,469"/>
 
 
-        <StackPanel Visibility="{Binding Path=IsVisibleStek, Converter={StaticResource BoolToVis}}" Margin="731,36,10,273">
+        <StackPanel Visibility="{Binding Path=IsVisibleStek, Converter={StaticResource BoolToVis}}" Margin="731,105,10,209">
             <TextBlock Text="Ime:" />
             <TextBox Text="{Binding CistacicaMD.Ime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Prezime:" />

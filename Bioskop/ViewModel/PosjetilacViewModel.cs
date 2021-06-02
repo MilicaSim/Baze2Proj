@@ -1,6 +1,7 @@
 ﻿using Bioskop.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace Bioskop.ViewModel
         public BindingList<Posjetilac> posjetioci;
         private BindingList<int> blagajnici;
         private int posjetilacBlagajnik;
+        private Blagajnik _selectedBlagajnik;
+        private ObservableCollection<Blagajnik> _listBlagajnika = new ObservableCollection<Blagajnik>();
 
         public ICommand NavCommand { get; private set; }
         public ICommand DodajCommand { get; private set; }
@@ -51,6 +54,8 @@ namespace Bioskop.ViewModel
 
         public BindingList<int> GetAllBlagajnici()
         {
+            _listBlagajnika.Clear();
+
             using (var access = new ModelContainer())
             {
                 var vl = access.Radniks_Blagajnik;
@@ -58,6 +63,7 @@ namespace Bioskop.ViewModel
                 BindingList<int> vs = new BindingList<int>();
                 foreach (var v in vl)
                 {
+                    _listBlagajnika.Add(v);
                     vs.Add(v.IdRadnika);
                 }
                 return vs;
@@ -149,11 +155,8 @@ namespace Bioskop.ViewModel
                         }
                     }
                     #endregion
-                    if (PosjetilacMD.BlagajnikIdRadnika <= 0)
-                    {
-                        MessageBox.Show("Mora biti odabran blagajnik!");
-                        return;
-                    }
+                    PosjetilacMD.Blagajnik = SelectedBlagajnik;
+
                     access.Posjetilacs.Add(PosjetilacMD);
 
 
@@ -430,6 +433,9 @@ namespace Bioskop.ViewModel
                 }
             }
         }
+
+        public Blagajnik SelectedBlagajnik { get => _selectedBlagajnik; set => _selectedBlagajnik = value; }
+        public ObservableCollection<Blagajnik> ListBlagajnika { get => _listBlagajnika; set => _listBlagajnika = value; }
         #endregion
 
     }

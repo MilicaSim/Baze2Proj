@@ -39,7 +39,23 @@
             <TextBlock Text="Trajanje (dana):" />
             <TextBox Text="{Binding RepertoarMD.Trajanje, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Label Content="Menadzer:"/>
-            <ComboBox SelectedValue="{Binding RepertoarMD.MenadzerIdRadnika, Mode=TwoWay}" ItemsSource="{Binding Menadzeri.Keys}"/>
+            <StackPanel Orientation="Vertical">
+
+                <ComboBox ItemsSource="{Binding Path=ListMenadzera}" SelectedItem="{Binding Path=SelectedMenadzer}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Ime"/>
+                                        <Binding Path="Prezime"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
 
         </StackPanel>
 

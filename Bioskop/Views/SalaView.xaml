@@ -70,7 +70,7 @@
         <RadioButton GroupName="Grupa" Content="Obrisi" IsChecked="False" Command="{Binding NavCommand}" CommandParameter="obrisi" Margin="829,10,109,469"/>
 
 
-        <StackPanel Visibility="{Binding Path=IsVisibleStek, Converter={StaticResource BoolToVis}}" Margin="731,36,10,273">
+        <StackPanel Visibility="{Binding Path=IsVisibleStek, Converter={StaticResource BoolToVis}}" Margin="731,96,10,182">
             <TextBlock Text="Naziv:" />
             <TextBox Text="{Binding SalaMD.Naziv, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Kapacitet:" />

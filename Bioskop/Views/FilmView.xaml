@@ -45,8 +45,17 @@
             <TextBlock Text="Trajanje:" />
             <TextBox Text="{Binding FilmMD.Trajanje, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Label Content="Repertoar:"/>
-            <ComboBox SelectedValue="{Binding FilmMD.RepertoarIdRepertoara, Mode=TwoWay}" ItemsSource="{Binding Repertoari}"/> 
+            <StackPanel Orientation="Vertical">
 
+                <ComboBox ItemsSource="{Binding Path=ListRepertoari}" SelectedItem="{Binding Path=SelectedRepertoar}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Naziv}">
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
         </StackPanel>
 
         <StackPanel Margin="719,398,10,10">

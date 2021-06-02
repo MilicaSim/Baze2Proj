@@ -24,6 +24,8 @@ namespace Bioskop.ViewModel
         private Film selektovaniFilm;
         private BindingList<Film> filmovi;
         private BindingList<int> repertoari;
+        private Repertoar _selectedRepertoar;
+        private ObservableCollection<Repertoar> _listRepertoari = new ObservableCollection<Repertoar>();
 
         public ICommand NavCommand { get; private set; }
         public ICommand DodajCommand { get; private set; }
@@ -49,14 +51,15 @@ namespace Bioskop.ViewModel
         }
         public BindingList<int> GetAllRepertoari()
         {
+            _listRepertoari.Clear();
             using (var access = new ModelContainer())
             {
-
                 var vl = access.Repertoars;
 
                 BindingList<int> vs = new BindingList<int>();
                 foreach (var v in vl)
                 {
+                    _listRepertoari.Add(v);
                     vs.Add(v.IdRepertoara);
                 }
                 return vs;
@@ -128,7 +131,8 @@ namespace Bioskop.ViewModel
                         }
                     }
                     #endregion
-                    
+
+                    FilmMD.Repertoar = SelectedRepertoar;
                     access.Films.Add(FilmMD);
 
 
@@ -392,7 +396,10 @@ namespace Bioskop.ViewModel
             }
         }
 
-       
+        public Repertoar SelectedRepertoar { get => _selectedRepertoar; set => _selectedRepertoar = value; }
+        public ObservableCollection<Repertoar> ListRepertoari { get => _listRepertoari; set => _listRepertoari = value; }
+
+
         #endregion
     }
 }

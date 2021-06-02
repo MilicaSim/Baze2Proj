@@ -1,6 +1,7 @@
 ﻿using Bioskop.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -24,7 +25,10 @@ namespace Bioskop.ViewModel
         private Repertoar repertoarMD;
         private Repertoar selektovaniRepertoar;
         private BindingList<Repertoar> repertoari;
-        
+        private Menadzer _selectedMenadzer;
+        private ObservableCollection<Menadzer> _listMenadzera = new ObservableCollection<Menadzer>();
+
+
 
         public ICommand NavCommand { get; private set; }
         public ICommand DodajCommand { get; private set; }
@@ -51,6 +55,7 @@ namespace Bioskop.ViewModel
         }
         public Dictionary<int, string> GetAllMenadzeri()
         {
+            _listMenadzera.Clear();
             using (var access = new ModelContainer())
             {
 
@@ -59,6 +64,7 @@ namespace Bioskop.ViewModel
                 Dictionary<int, string> vs = new Dictionary<int, string>();
                 foreach (var v in vl)
                 {
+                    _listMenadzera.Add(v);
                     vs[v.IdRadnika] = v.Ime + " " + v.Prezime;
                 }
                 return vs;
@@ -86,6 +92,7 @@ namespace Bioskop.ViewModel
                 {
                     #region Validation
 
+                    RepertoarMD.Menadzer = SelectedMenadzer;
                     if (RepertoarMD.Naziv == null)
                     {
                         MessageBox.Show("Polje naziv mora biti popunjeno!");
@@ -98,7 +105,7 @@ namespace Bioskop.ViewModel
                     }
                     else
                     {
-                        if (RepertoarMD.MenadzerIdRadnika <= 0)
+                        if (SelectedMenadzer==null)
                         {
                             MessageBox.Show("Menadzer mora biti odabran!");
                             return;
@@ -327,7 +334,10 @@ namespace Bioskop.ViewModel
             }
         }
 
-     
+        public Menadzer SelectedMenadzer { get => _selectedMenadzer; set => _selectedMenadzer = value; }
+        public ObservableCollection<Menadzer> ListMenadzera { get => _listMenadzera; set => _listMenadzera = value; }
+
+
         #endregion
     }
 }
