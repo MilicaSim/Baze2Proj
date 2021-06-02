@@ -1,0 +1,49 @@
+USE [Baze2]
+GO
+/****** Object:  UserDefinedFunction [dbo].[izlistaj_za_salu_koliko_ima_sjedista_u_redu]    Script Date: 02/06/2021 19:35:48 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER function [dbo].[izlistaj_za_salu_koliko_ima_sjedista_u_redu]
+(
+	@ID_sale as int,
+	@Red as int
+)
+returns int
+as
+begin
+	declare @retVal as int;
+		select @retVal = count(vlS.IdSale) from Salas vlS left outer join Sadrzis ps 
+		on ps.SalaIdSale = vlS.IdSale left outer join Sjedistes rs on rs.IdSjedista = ps.SjedisteIdSjedista
+		where rs.Red = @Red and vlS.IdSale = @ID_sale
+		group by vlS.IdSale
+	return @retVal
+end;
+
+declare @ret as int;
+exec @ret=[dbo].[izlistaj_za_salu_koliko_ima_sjedista_u_redu] 6,10
+select @ret
+
+****************************************
+USE [Baze2]
+GO
+/****** Object:  UserDefinedFunction [dbo].[izlistaj_sve_cistacice_po_sali]    Script Date: 02/06/2021 20:18:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER FUNCTION [dbo].[izlistaj_sve_cistacice_po_sali]
+(	
+	@ID_sale as int
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	select uc.Ime,uc.Prezime from Radniks uc left outer join Radniks_Cistacica vlS on uc.IdRadnika = vlS.IdRadnika left outer join SalaCistacica ps 
+		on ps.Cistacicas_IdRadnika = vlS.IdRadnika left outer join Salas rs on rs.IdSale = ps.Salas_IdSale
+		where rs.IdSale = @ID_sale
+)
+
+select * from [dbo].[izlistaj_sve_cistacice_po_sali] (1)

@@ -1,0 +1,84 @@
+USE [Baze2]
+GO
+/****** Object:  StoredProcedure [dbo].[Vrati_broj_glumaca_sa_brojem_uloga_vecim_od_5]    Script Date: 02/06/2021 16:21:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[Vrati_broj_glumaca_sa_brojem_uloga_vecim_od_5](
+ @retVal int OUTPUT 
+)
+as
+begin
+	declare @IdGlumca_g int
+	declare @Ime_g varchar(20)
+	declare @Prezime_g varchar(20)
+	declare @BrojUloga int
+declare glumac_cursor cursor
+for select g.BrojUloga, g.Ime, g.Prezime, g.BrojUloga from Glumacs g
+set @retVal = 0;
+open glumac_cursor;
+fetch next from glumac_cursor into @IdGlumca_g, @Ime_g, @Prezime_g, @BrojUloga
+	while @@FETCH_STATUS=0			    
+	begin							   
+		if(@BrojUloga >= 5)
+			begin
+				set @retVal = @retVal +  1;
+			end
+	fetch next from glumac_cursor  
+	into @IdGlumca_g, @Ime_g, @Prezime_g, @BrojUloga						   
+end									  
+close glumac_cursor;			   
+deallocate glumac_cursor;
+end;
+
+declare @ret as int;
+begin
+exec [dbo].[Vrati_broj_glumaca_sa_brojem_uloga_vecim_od_5]  @ret output 
+ select @ret
+end
+*********************************
+USE [Baze2]
+GO
+/****** Object:  StoredProcedure [dbo].[Vrati_glumca_sa_najvecim_brojem_uloga]    Script Date: 02/06/2021 16:47:16 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[Vrati_glumca_sa_najvecim_brojem_uloga]
+(
+@Naziv_filma varchar(50),
+
+@retVal varchar(200) output
+)
+as
+begin try
+	declare @JMBG_s as bigint
+	declare @Ime_s varchar(20)
+	declare @Prezime_s varchar(20)
+	declare @Dat_rodj int
+	declare @Naz_serv varchar(20)
+
+	select @JMBG_s = sr.IdGlumca, @Ime_s = sr.Ime, @Prezime_s =  sr.Prezime, @Dat_rodj = min(sr.BrojUloga), @Naz_serv = ss.Naziv from Films ss, FilmGlumac rs, Glumacs sr
+	where ss.IdFilma = rs.Films_IdFilma and sr.IdGlumca = rs.Glumacs_IdGlumca  and ss.Naziv = @Naziv_filma
+	group by ss.IdFilma, ss.Naziv, sr.IdGlumca, sr.Ime, sr.Prezime, sr.BrojUloga
+	having min(sr.BrojUloga) <= all
+	(select min(BrojUloga) from Glumacs sr1, FilmGlumac rs1, Films ss1 where rs1.Glumacs_IdGlumca = sr1.IdGlumca and ss1.IdFilma = rs1.Films_IdFilma and
+	ss1.Naziv = @Naziv_filma
+	group by BrojUloga )
+	order by sr.BrojUloga
+	
+	set @retVal = cast(@JMBG_s as varchar(15)) +' '+@Ime_s+' '+@Prezime_s+' '+cast(@Dat_rodj as varchar(20));
+end try
+begin catch
+	SELECT
+	ERROR_NUMBER() AS ErrorNumber, ERROR_MESSAGE() AS ErrorMessage; 
+end catch
+
+
+declare @ret varchar(200);
+begin
+exec [dbo].[Vrati_glumca_sa_najvecim_brojem_uloga] 'Film1', @ret output
+select @ret
+end
+

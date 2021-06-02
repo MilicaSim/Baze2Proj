@@ -1,0 +1,27 @@
+create trigger TrigerInsertion
+on SalaCistacica
+for insert
+as
+declare @ID_cistacice int;
+declare @ID_sale int;
+declare @action varchar(100);
+select @ID_cistacice = i.Cistacicas_IdRadnika from inserted i;
+select @ID_sale = i.Salas_IdSale from inserted i;
+set @action = 'Inserted record';
+insert into audit
+(ID_cistacice, ID_sale, Audit_action, Audit_datetime)
+values
+(@ID_cistacice, @ID_sale, @action, getdate());
+print 'after insert trigger fired!'
+
+select * from audit
+select * from SalaCistacica
+
+***************************************
+
+create trigger DeleteSjedisteTrigger
+on Sjedistes
+for delete
+as
+delete from Sadrzis
+where SjedisteIdSjedista in (select deleted.IdSjedista from deleted)
